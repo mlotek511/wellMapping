@@ -57,13 +57,18 @@ casingdiameter   = list(df["CasingDiameter(in)"])
 map = folium.Map(location = startingLocation, zoom_start = 11,  max_zoom=14, tiles = "Stamen Terrain")
 fgv = folium.FeatureGroup(name="Well Map")
 
-for lt, ln, wy, wd, nm, cy, my, db, wl, cd, dr in zip(lat, lon, wellYield, wellDepth, name, county, municipality, depthbedrock, waterlevelstatic, casingdiameter, driller):
-    iframe = folium.IFrame(str(my).title() + "- " + str(cy).title() + " County<br>" + "Date Drilled: " + str(nm) + "<br>" + "Well Yield: " + str(wy)+ " gpm<br>" 
-    + "Well Depth: " + str(wd) + " ft<br>" + "Static Water Level: " + str(wl) + "ft<br>" + "Casing Diameter: " + str(cd) + "in<br>" +"Depth to Bedrock: " + str(db) + " ft<br>" +"Drill Company: " + str(dr))
+for lt, ln, wy, wd, nm, cy, my, db, wl, cd, dr in zip(lat, lon, wellYield, wellDepth, name, county, \
+    municipality, depthbedrock, waterlevelstatic, casingdiameter, driller):
+
+    iframe = folium.IFrame(str(my).title() + "- " + str(cy).title() + " County<br>" + "Date Drilled: "\
+         + str(nm) + "<br>" + "Well Yield: " + str(wy)+ " gpm<br>" + "Well Depth: " + str(wd) + " ft<br>"\
+             + "Static Water Level: " + str(wl) + "ft<br>" + "Casing Diameter: " + str(cd) + "in<br>"\
+                 +"Depth to Bedrock: " + str(db) + " ft<br>" +"Drill Company: " + str(dr))
     
     popup = folium.Popup(iframe, min_width=300, max_width=500)
     
-    marker = folium.CircleMarker([lt, ln], popup=popup, fill_color = wellColor(wy), color = 'grey', fill_opacity = 0.7).add_to(map)
+    marker = folium.CircleMarker([lt, ln], popup=popup, fill_color = wellColor(wy), \
+        color = 'grey', fill_opacity = 0.7).add_to(map)
 
 # Write out .html
 print('#### SAVING MAP DATA.....', end = '')
